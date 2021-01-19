@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CLIUtilities.Tests": {
+      "commandName": "Project",
+      "commandLineArgs": "-t 0"
+    }
+  }
+}
