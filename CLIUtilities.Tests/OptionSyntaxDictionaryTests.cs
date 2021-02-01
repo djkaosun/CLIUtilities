@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using mylib.CLI;
 using Xunit;
+using CLIUtilities.Tests.TestDatas;
 
 namespace CLIUtilities.Tests
 {
