@@ -11,21 +11,22 @@ namespace mylib.CLI
         /// <summary>
         /// シンタックス ディクショナリ。
         /// </summary>
-        public OptionSyntaxDictionary OptionSyntaxDictionary;
+        public OptionSyntaxDictionary OptionSyntaxDictionary { get; set; }
+
+        /// <summary>
+        /// コンフィグから読み取ったオプションのディクショナリ。
+        /// </summary>
+        IDictionary<string, string[]> ConfigOptionDictionary { get; set; }
 
         /// <summary>
         /// コンストラクター。
         /// </summary>
         /// <param name="optionSyntaxDictionary">シンタックス ディクショナリ。</param>
-        public ArgsParser(OptionSyntaxDictionary optionSyntaxDictionary)
+        public ArgsParser(OptionSyntaxDictionary optionSyntaxDictionary = null, IDictionary<string, string[]> configOption = null)
         {
             OptionSyntaxDictionary = optionSyntaxDictionary;
+            ConfigOptionDictionary = configOption;
         }
-
-        /// <summary>
-        /// コンストラクター。
-        /// </summary>
-        public ArgsParser() : this(null) { }
 
         /// <summary>
         /// コマンドライン引数をシンタックスに基づいてパースします。
@@ -35,6 +36,7 @@ namespace mylib.CLI
         /// <exception cref="ArgumentException">引数に起因してパースに失敗する場合。</exception>
         public IDictionary<string, IList<string>> Parse(string[] args)
         {
+            if (OptionSyntaxDictionary == null) throw new InvalidOperationException("OptionSyntaxDictionary is not set.");
             IDictionary<string, IList<string>> argsDictionary = new Dictionary<string, IList<string>>();
             for (uint i = 0; i < args.Length;)
             {
@@ -109,6 +111,27 @@ namespace mylib.CLI
                     }
 
                     argsDictionary.Add(defaultSyntax.FullName, valueCollection);
+                }
+            }
+
+            if (ConfigOptionDictionary != null)
+            {
+                foreach (var item in ConfigOptionDictionary)
+                {
+                    if (!OptionSyntaxDictionary.ContainsKey(item.Key)) throw new InvalidOperationException("A option in ConfigDictionary is not contains in OptionSintaxDictionary");
+
+                    if (argsDictionary.ContainsKey(item.Key)) continue; // コンフィグよりコマンドライン引数優先
+
+                    var syntax = OptionSyntaxDictionary[item.Key];
+
+                    if (syntax.IsDefault && syntax.ValueCount == 0 || syntax.ValueCount == item.Value.Length)
+                    {
+                        argsDictionary.Add(syntax.FullName, item.Value);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("The number of option's values in ConfigDictionary is too mach or less.");
+                    }
                 }
             }
 
