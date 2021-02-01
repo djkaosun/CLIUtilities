@@ -5,7 +5,7 @@
 
     <IsPackable>false</IsPackable>
 
-    <StartupObject>mylib.CLI.Test.MainClass</StartupObject>
+    <StartupObject></StartupObject>
 
     <AssemblyName>Test-CLIUtil</AssemblyName>
   </PropertyGroup>

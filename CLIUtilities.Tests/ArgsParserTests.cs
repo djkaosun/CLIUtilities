@@ -11,7 +11,7 @@ namespace CLIUtilities.Tests
         [ClassData(typeof(ValidOptionSyntaxesAndArgs))]
         public void ParseTest_Valid(string[] args, IDictionary<string, IList<string>> expected, params OptionSyntax[] syntaxes)
         {
-            OptionSyntaxDictionary syntaxDictionary = new OptionSyntaxDictionary();
+            mylib.CLI.OptionSyntaxDictionary syntaxDictionary = new OptionSyntaxDictionary();
             foreach (OptionSyntax syntax in syntaxes)
             {
                 syntaxDictionary[syntax.FullName] = syntax;

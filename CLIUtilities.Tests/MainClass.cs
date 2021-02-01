@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using mylib.CLI;
 
-namespace mylib.CLI.Test
+namespace CLIUtilities.Tests
 {
     class MainClass
     {
+        /*
         static void Main(string[] args)
         {
             Console.WriteLine(Path.GetFileNameWithoutExtension(Process.GetCurrentProcess().MainModule.FileName));
@@ -79,6 +81,7 @@ namespace mylib.CLI.Test
                 }
             }
         }
+        //*/
 
         private static void WriteArgs(string[] args)
         {
