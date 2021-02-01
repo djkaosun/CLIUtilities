@@ -16,7 +16,7 @@ namespace mylib.CLI
         /// <summary>
         /// コンフィグから読み取ったオプションのディクショナリ。
         /// </summary>
-        IDictionary<string, string[]> ConfigOptionDictionary { get; set; }
+        public IDictionary<string, string[]> ConfigOptionDictionary { get; set; }
 
         /// <summary>
         /// コンストラクター。
