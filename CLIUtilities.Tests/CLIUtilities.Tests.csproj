@@ -27,8 +27,4 @@
     <ProjectReference Include="..\cLIUtilities\CLIUtilities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="TestDatas\" />
-  </ItemGroup>
-
 </Project>

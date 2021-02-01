@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using mylib.CLI;
 
-namespace CLIUtilities.Tests
+namespace CLIUtilities.Tests.TestDatas
 {
     class ValidOptionSyntaxes : IEnumerable<object[]>
     {
